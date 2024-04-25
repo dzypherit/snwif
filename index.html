@@ -138,13 +138,22 @@
     document.addEventListener("DOMContentLoaded", function() {
       const snwifImage = document.getElementById("snwif-image");
   
-      document.addEventListener("mousemove", function(event) {
-        const mouseX = event.clientX;
-        const mouseY = event.clientY;
+      function moveImage(event) {
+        let clientX, clientY;
+        if (event.touches) {
+          clientX = event.touches[0].clientX;
+          clientY = event.touches[0].clientY;
+        } else {
+          clientX = event.clientX;
+          clientY = event.clientY;
+        }
   
-        snwifImage.style.left = mouseX + "px";
-        snwifImage.style.top = mouseY + "px";
-      });
+        snwifImage.style.left = clientX + "px";
+        snwifImage.style.top = clientY + "px";
+      }
+  
+      document.addEventListener("mousemove", moveImage);
+      document.addEventListener("touchmove", moveImage);
     });
   </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
